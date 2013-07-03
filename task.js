@@ -1,48 +1,83 @@
 /**
- * Создает экземпляр космического корабля
+ * Создает экземпляр космического корабля.
  * @name Vessel
- * @param {String} description Описание корабля
+ * @param {String} name Название корабля.
+ * @param {Number}[] position Местоположение корабля.
+ * @param {Number} capacity Грузоподъемность корабля.
  */
-function Vessel(description) {}
+function Vessel(name, position, capacity) {}
 
 /**
- * Создает экземпляр планеты
- * @name Planet
- * @param {String} description Описание планеты
+ * Выводит текущее состояние корабля: имя, местоположение, доступную грузоподъемность.
+ * @example
+ * vessel.report(); // Грузовой корабль. Местоположение: Земля. Товаров нет.
+ * @example
+ * vesserl.report(); // Грузовой корабль. Местоположение: 50,20. Груз: 200т.
+ * @name Vessel.report
  */
-function Planet(description) {}
+Vessel.prototype.report = function () {}
 
-// @TODO: указывать грузоподъемность в килограммах, фунтах, тоннах.
-var vessel = new Vessel('Грузовой корабль. Местоположение: -45,-50. Грузоподъемность: 1000кг');
+/**
+ * Выводит количество свободного места на корабле.
+ * @name Vessel.getFreeSpace
+ */
+Vessel.prototype.getFreeSpace = function () {}
 
-var coalPlanet = new Planet('Угольная планета. Местоположение: 50,50. Груз: уголь');
-var earth = new Planet('Земля. Местоположение: -50,-50.');
+/**
+ * Выводит количество занятого места на корабле.
+ * @name Vessel.getOccupiedSpace
+ */
+Vessel.prototype.getOccupiedSpace = function () {}
 
-// @TODO: реализовать необходимые методы, чтобы миссия стала возможной.
-// метод Vessel.report должен выводить в консоль текущий статус корабля.
-// методы Vessel.load и Vessel.unloadAll должны выводить в консоль результат выполнения операции.
-console.log('Миссия 1. Доставить 800кг угля на Землю.');
-vessel.report(); // Грузовой корабль. Местоположение: около Земли. Товаров нет.
-vessel.flyTo([10, 20]);
-vessel.report(); // Грузовой корабль. Местоположение: где-то в космосе. Товаров нет.
-vessel.load(coalPlanet.getCargo('400кг')); // Для загрузки груза необходимо приземлиться на планету.
-vessel.flyTo(coalPlanet);
-vessel.report(); // Грузовой корабль. Местоположение: Угольная планета. Товаров нет.
-// @TODO: выводить ошибку при загрузке несуществующего вида товара
-// vessel.load(coalPlanet.getCargo('0.6т кукурузы')); // На угольной планете нет такого товара.
-// @TODO: при загрузке корабля без указания веса груза загружать корабль полностью.
-vessel.load(coalPlanet.getCargo('800кг угля')); // Загружено 800кг угля (доступная грузоподъемность — 200кг).
-vessel.load(coalPlanet.getCargo('0.6т угля')); // Невозможно загрузить 600кг (доступная грузоподъемность — 400кг).
-vessel.report(); // Грузовой корабль. Местоположение: где-то в космосе. Товар: 800кг угля.
-vessel.flyTo(earth);
-vessel.unloadAll(); // Выгружено 800кг угля. Доступная грузоподъемность — 1000кг.
+/**
+ * Переносит корабль в указанную точку.
+ * @param {Number}[]|Planet newPosition Новое местоположение корабля.
+ * @example
+ * vessel.flyTo([1,1]);
+ * @example
+ * var earth = new Planet('Земля', [1,1]);
+ * vessel.flyTo(earth);
+ * @name Vessel.report
+ */
+Vessel.prototype.flyTo = function (newPosition) {}
 
-console.log('Миссия 2. Алмазы и металл.');
-// @TODO: добавить планету с алмазами и металлом
-// @TODO: отвезти 200кг алмазов, 301кг металла и 500кг угля на Землю
-// @TODO: реализовать метод vessel.blackbox, который выведет все значимые события после прибытия на Землю
+/**
+ * Создает экземпляр планеты.
+ * @name Planet
+ * @param {String} name Название Планеты.
+ * @param {Number}[] position Местоположение планеты.
+ * @param {Number} availableAmountOfCargo Доступное количество груза.
+ */
+function Planet(name, position, availableAmountOfCargo) {}
 
-console.log('Бонусная миссия. Захватчики.');
-// @TODO: реализовать вражеский корабль, который может грабить и уничтожать другие космические корабли.
-// @TODO: реализовать возможность для грузового корабля спастись бегством с потерей всего/части груза.
-// @TODO: написать пример миссии с участием вражеского корабля.
+/**
+ * Выводит текущее состояние планеты: имя, местоположение, количество доступного груза.
+ * @name Planet.report
+ */
+Planet.prototype.report = function () {}
+
+/**
+ * Возвращает доступное количество груза планеты.
+ * @name Vessel.getAvailableAmountOfCargo
+ */
+Planet.prototype.getAvailableAmountOfCargo = function () {}
+
+/**
+ * Загружает на корабль заданное количество груза.
+ * 
+ * Перед загрузкой корабль должен приземлиться на планету.
+ * @param {Vessel} vessel Загружаемый корабль.
+ * @param {Number} cargoWeight Вес загружаемого груза.
+ * @name Vessel.loadCargoTo
+ */
+Planet.prototype.loadCargoTo = function (vessel, cargoWeight) {}
+
+/**
+ * Выгружает с корабля заданное количество груза.
+ * 
+ * Перед выгрузкой корабль должен приземлиться на планету.
+ * @param {Vessel} vessel Разгружаемый корабль.
+ * @param {Number} cargoWeight Вес выгружаемого груза.
+ * @name Vessel.unloadCargoFrom
+ */
+Planet.prototype.unloadCargoFrom = function (vessel, cargoWeight) {}
