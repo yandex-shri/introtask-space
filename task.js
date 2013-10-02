@@ -18,13 +18,13 @@ function Vessel(name, position, capacity) {}
 Vessel.prototype.report = function () {}
 
 /**
- * Выводит количество свободного места на корабле.
+ * Возвращает количество свободного места на корабле.
  * @name Vessel.getFreeSpace
  */
 Vessel.prototype.getFreeSpace = function () {}
 
 /**
- * Выводит количество занятого места на корабле.
+ * Возвращает количество занятого места на корабле.
  * @name Vessel.getOccupiedSpace
  */
 Vessel.prototype.getOccupiedSpace = function () {}
@@ -37,7 +37,7 @@ Vessel.prototype.getOccupiedSpace = function () {}
  * @example
  * var earth = new Planet('Земля', [1,1]);
  * vessel.flyTo(earth);
- * @name Vessel.report
+ * @name Vessel.flyTo
  */
 Vessel.prototype.flyTo = function (newPosition) {}
 
